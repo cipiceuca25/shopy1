@@ -1,0 +1,42 @@
+<%- content_for :slider do %>
+  <script type="text/javascript">
+    $(document).ready(function() {
+
+      var handles = ['<%= prefix %>_slider_handle_min', '<%= prefix %>_slider_handle_max'];
+
+      new Control.Slider(handles, '<%= prefix %>_slider', {
+        range: $R(<%= low %>, <%= high %>),
+        values: $R(<%= low %>, <%= high %>),
+        sliderValue: [<%= current_low %>, <%= current_high %>],
+        spans: ['<%= prefix %>_slider_span'],
+        restricted: true,
+        onSlide: function(values) {
+          $('<%= prefix %>_text').innerHTML = "<%= stringprefix %>" + values[0] + "<%= stringpostfix %> - <%= stringprefix %>" + values[1] + '<%= stringpostfix %>';
+        },
+        onChange: function(values) {
+          jQuery("#rightside").load("/do_the_search?<%= "#{prefix}_min=".to_s %>" + values[0] + "<%= "&#{prefix}_max=".to_s.html_safe %>" + values[1]);
+        }
+      });
+    }
+  )();
+  </script>
+<% end %>
+<div class="sep_filter">
+  <div class="sep_filterbgtop">
+    <div class="sep_filterbgdown">
+
+      <p><b><%= name %></b> <span id="<%= prefix %>_text"><%= stringprefix %><%= current_low %><%= stringpostfix %>
+      - <%= stringprefix %><%= current_high %><%= stringpostfix %></span></p>
+
+      <img src="/images/slider/slicebar_inactive_start_padded.png" class="ends">
+
+      <div id="<%= prefix %>_slider" class="slider">
+        <div id="<%= prefix %>_slider_handle_min" class="handle left"></div>
+        <div id="<%= prefix %>_slider_handle_max" class="handle right"></div>
+        <div id="<%= prefix %>_slider_span" class="span"></div>
+      </div>
+      <img src="/images/slider/slicebar_inactive_end_padded.png" class="ends">
+    </div>
+  </div>
+</div>
+

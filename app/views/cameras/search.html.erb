@@ -1,0 +1,67 @@
+<div class="grid_24" id="main">
+
+  <%= render :partial => 'cameras/search_panel' %>
+  <div class="grid_15 right" id="rightside">
+    <div class="grid_15">
+      <ul id="filter_right">
+        <li><a href="#" onclick="jQuery('#price_slider_span').attr('style', 'left: 0px; width: 225px;');jQuery('#price_slider_handle_min').attr('style', 'left: 0px;');jQuery('#price_slider_handle_max').attr('style', 'left: 225px;');jQuery('#rightside').load( '/do_sort_by_price');">Price</a></li>
+        <li><a href="#" onclick="jQuery('#rightside').load( '/do_sort_by_megapixels');">Megapixels</a></li>
+        <li><a href="#" onclick="jQuery('#rightside').load( '/do_sort_by_screen');">Screen</a></li>
+        <li><a href="#" onclick="jQuery('#rightside').load( '/do_sort_by_brand');">Brand</a></li>
+      </ul>
+    </div>
+
+    <div class="grid_15" id="cont_products">
+      <!--START PRODUCT LOOP-->
+      <% @cameras.each do |camera| %>
+        <div class="grid_14 product">
+          <span>
+            <div class="product_buyphoto">
+              <div class="product_buyphotoimg">
+              <a href="<%= amazon_product_link(camera.page_url) %>"><img src="<%= camera.original_extension %>" width="160" height="auto" alt="Camera"/></a></div>
+              <h1 style="font-weight: bold;text-align:center;"><%= camera.price.nil? ? 'not available': '$' + camera.price.to_s %></h1><br>
+              <a href="<%= amazon_product_link(camera.page_url) %>"><img src="images/template/buyamazon.gif" width="180" height="35" alt="Buy at Amazon"/></a>
+            </div>
+            <div class="product_buyphotoinfo">
+              <h1><%= link_to camera.name, amazon_product_link(camera.page_url), :style => "color: #000000;", :target => 'blank' %></h1>
+
+              <p class="price"> <%= camera.megapixels %> MP - Zoom <%= camera.zoom %>
+              x</p>
+
+              <p class="info"><%= camera.description ? CGI.unescapeHTML((camera.description).html_safe) : "" %></p>
+
+              <p class="info"><%= camera.brand.name %></p>
+            </div>
+          <div class="clear"></div></span>
+        </div>
+      <% end %>
+      <!--END PRODUCT LOOP-->
+
+
+    </div>
+
+    <% unless @total_pages.zero? %>
+      <div class="grid_15" id="pagination">
+        <% if @page == 1 %>
+        <% else %>
+          <a href="#" class="pag_number" onclick="jQuery('#rightside').load('/do_the_search?page=' + <%=@page.to_i - 1%>);"><span>« Prev</span></a>
+        <% end %>
+
+        <% 1.upto(@total_pages) do |i| %>
+          <% if i == @page and !@total_pages == 1 %>
+            <span class="pag_number pagactive"><%= i.to_s %></span>
+          <% elsif @total_pages == 1 %>
+          <% else %>
+            <a href="#" class="pag_number" onclick="jQuery('#rightside').load('/do_the_search?page=' + <%=i%>);"><span><%= i.to_s %></span></a>
+          <% end %>
+        <% end %>
+
+        <% if @page == @total_pages %>
+        <% else %>
+          <a href="#" class="pag_number" onclick="jQuery('#rightside').load('/do_the_search?page=' + <%=@page.to_i + 1%>);"><span>Next »</span></a>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+

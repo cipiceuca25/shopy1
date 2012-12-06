@@ -1,0 +1,31 @@
+<h1>Listing cameras</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Megapixels</th>
+    <th>Price</th>
+    <th>Zoom</th>
+    <th>Screensize</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @cameras.each do |camera| %>
+      <tr>
+        <td><%= camera.name %></td>
+        <td><%= camera.megapixels %></td>
+        <td><%= camera.price %></td>
+        <td><%= camera.zoom %></td>
+        <td><%= camera.screensize %></td>
+        <td><%= link_to 'Show', camera %></td>
+        <td><%= link_to 'Edit', edit_camera_path(camera) %></td>
+        <td><%= link_to 'Destroy', camera, :confirm => 'Are you sure?', :method => :delete %></td>
+      </tr>
+  <% end %>
+</table>
+
+<br/>
+
+<%= link_to 'New Camera', new_camera_path, :class => 'button' %>

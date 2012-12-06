@@ -1,0 +1,55 @@
+<%= form_for(@camera, :html => {:multipart => true}) do |f| %>
+    <% if @camera.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@camera.errors.count, "error") %> prohibited this camera from being saved:</h2>
+
+          <ul>
+            <% @camera.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
+    </div>
+    <div class="field">
+      <%= f.label :megapixels %>
+      <br/>
+      <%= f.text_field :megapixels %>
+    </div>
+    <div class="field">
+      <%= f.label :price %>
+      <br/>
+      <%= f.text_field :price %>
+    </div>
+    <div class="field">
+      <%= f.label :zoom %>
+      <br/>
+      <%= f.text_field :zoom %>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <br/>
+      <%= f.text_area :description %>
+    </div>
+    <div class="field">
+      <%= f.label :screensize %>
+      <br/>
+      <%= f.text_field :screensize %>
+    </div>
+    <div class="field">
+      <%= f.label 'Brand' %>
+      <br/>
+      <%= f.select :brand_id, Brand.find(:all, :order => 'name').collect { |r| [r.name, r.id] } %>
+    </div>
+    <div class="field">
+      <%= f.file_field :image %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

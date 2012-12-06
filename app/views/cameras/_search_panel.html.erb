@@ -1,0 +1,74 @@
+<%- content_for :head do %>
+  <style type="text/css">
+    div.slider {
+      width: 245px;
+      float: left;
+      background-image: url('/images/slider/slicebar_inactive_padded.png');
+      height: 21px;
+      position: relative;
+    }
+
+    div.span {
+      background-image: url('/images/slider/slicebar_active_padded.png');
+      position: relative;
+      padding: 0 10px 0 0;
+      width: 80px;
+      height: 21px;
+      z-index: 2;
+    }
+
+    div.handle {
+      width: 20px;
+      height: 21px;
+      margin: 0px;
+      background-image: url('/images/slider/slicebar_circle_blue.png');
+      cursor: move;
+      z-index: 3;
+      position: absolute;
+    }
+
+    img.ends {
+      position: relative;
+      float: left;
+    }
+  </style>
+<% end %>
+<div class="grid_8" id="leftside">
+  <h1>Find cameras using these options:</h1>
+
+  <%- unless @cameras.nil? %>
+    <div id="result">
+      <h3 style="color: grey;" id="result-page"> (showing <%= @results %> of <%=  @total_camera %> cameras)</h3>
+    </div>
+  <%- end %>
+
+  <%= render :partial => 'cameras/sliderjs', :locals => {:name => 'Price',
+    :prefix => 'price',
+    :low => PRICE_MIN,
+    :high => max_price,
+    :stringprefix => '$',
+    :stringpostfix => '',
+    :current_low => (session['price_min'] or PRICE_MIN),
+    :current_high => (session['price_max'] or max_price),
+    :result =>(params[:result])} %>
+  <%= render :partial => 'cameras/sliderjs', :locals => {:name => 'Megapixels',
+    :prefix => 'megapixels',
+    :low => MEGAPIXELS_MIN,
+    :high => max_megapixel,
+    :stringprefix => '',
+    :stringpostfix => 'mp',
+    :current_low => (session['megapixels_min'] or MEGAPIXELS_MIN),
+    :current_high => (session['megapixels_max'] or max_megapixel)} %>
+
+  <%= render :partial => 'cameras/sliderjs', :locals => {:name => 'Zoom',
+    :prefix => 'zoom',
+    :low => ZOOM_MIN,
+    :high => max_zoom,
+    :stringprefix => '',
+    :stringpostfix => 'x',
+    :current_low => (session['zoom_min'] or ZOOM_MIN),
+    :current_high => (session['zoom_max'] or max_zoom)} %>
+
+  <%= render :partial => 'cameras/brands' %>
+</div>
+

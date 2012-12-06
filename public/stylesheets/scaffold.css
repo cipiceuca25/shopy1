@@ -1,0 +1,91 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+.bar { 
+	clear: both;
+	font-size: 1.1em;
+	height: 40px; 
+	color: #FFF;
+	margin: 0 0 0 0px; 
+	background: #000;
+}
+
+.bar li { 
+	margin: 0; 
+	padding: 10px 15px 8px 15px;
+	color: #000;
+	background: #000;
+	float: left; 
+}
+
+.bar li.active { 
+	background: #E0691A url(images/bar.gif) no-repeat center top; 
+	color: #333333;
+	font-weight: bold; 
+	padding: 7px 10px 6px 10px;
+}
+
+.bar li a { 
+	font-weight: bold;
+	color: #FFF; 
+	background: inherit;
+	text-decoration: none;
+} 
+
+.bar li a:hover { 
+	color: #555555; 
+	background: inherit;
+} 
+
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+

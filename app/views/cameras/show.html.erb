@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @camera.name %>
+</p>
+
+<p>
+  <b>Megapixels:</b>
+  <%= @camera.megapixels %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @camera.price %>
+</p>
+
+<p>
+  <b>Zoom:</b>
+  <%= @camera.zoom %>
+</p>
+
+<p>
+  <b>Screensize:</b>
+  <%= @camera.screensize %>
+</p>
+
+<p>
+  <img src="<%= @camera.url_to_s3 %>" width="179" height="100" alt="Camera"/>
+</p>
+
+
+<%= link_to 'Edit', edit_camera_path(@camera), :class => 'button' %>
+<%= link_to 'Back', cameras_path, :class => 'button' %>

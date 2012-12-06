@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="googlebot" content="Index, Follow"/>
+    <meta name="robots" content="all"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <title>SortGadget - find cameras quickly</title>
+    <meta name="keywords" content="sortgadget, camera, cameras, buy, find, sort"/>
+    <meta name="summary" content="SpeedAura"/>
+    <link rel="image_src" href="image.jpg"/>
+    <!-- facebook Share Image-->
+    <link href="/stylesheets/style.css" rel="stylesheet" type="text/css"/>
+    <!--[if IE]>
+    <link href="/stylesheets/iestyle.css" rel="stylesheet" type="text/css"/>
+    <![endif]-->
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag 'slider', 'jquery-1.6.2.min' %>
+    <%= yield :head %>
+    <%= yield :slider %>
+    
+    <script type="text/javascript">
+      jQuery.noConflict();
+
+      jQuery(document).ready(function($)
+      {
+        $("#all_checkbox").click(function()
+        {
+          var checked_status = this.checked;
+          jQuery('input').each(function()
+          {
+            this.checked = checked_status;
+          })
+        });
+      });
+    </script>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-26585177-1']);
+      _gaq.push(['_setDomainName', '.sortgadget.com']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+    <%= csrf_meta_tag %>
+  </head>
+
+  <body>
+    <div id="bgtop">
+      <div class="container_24">
+
+        <div class="grid_24" id="header">
+          <div class="grid_7" id="logo">
+          <a href="/"><img src="/images/template/logo.jpg" width="244" height="41" alt="SortGadget Logo"/></a></div>
+          <div class="grid_10 right" id="search">
+            <%= form_tag '/criteria_search' do -%>
+              <label for="textfield">Search:</label>
+              <%= text_field_tag 'search', (params[:search] or nil), :placeholder => 'Enter search term...' %>
+              <%= submit_tag 'Search' %>
+            <% end -%>
+          </div>
+        </div>
+
+        <% unless true %>
+          <div class="bar">
+            <%= navigation @main_menu, :hover_text => true %>
+          </div>
+        <% end %>
+
+        <p style="color: green"><%= flash[:notice] %></p>
+
+        <div class="main_body">
+          <%= yield %>
+        </div>
+
+        <div class="grid_24" id="footer">
+          <p>All rights reserved - <a href="http://www.sortgadget.com">www.sortgadget.com</a> -
+          <a href="mailto:contact@sortgadget.com">contact@sortgadget.com</a></p>
+        </div>
+      </div>
+      <div class="clear"></div>
+    </div>
+  </body>
+</html>
+
+

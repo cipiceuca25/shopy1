@@ -1,0 +1,22 @@
+defaults: &defaults
+  adapter: postgresql
+  host: localhost
+  port: 5432
+  username: cybergarage
+  password: 123456
+  schema_search_path: public
+  encoding: unicode
+  pool: 5
+  template: template1
+
+development:
+  <<: *defaults
+  database: sortgadget
+
+test:
+  <<: *defaults
+  database: sortgadget
+
+production:
+  <<: *defaults
+  database: sortgadget

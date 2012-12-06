@@ -1,0 +1,5 @@
+mislav-will_paginate --source http://gems.github.com
+authlogic
+aws-s3
+bcrypt-ruby
+rails --version 2.3.8

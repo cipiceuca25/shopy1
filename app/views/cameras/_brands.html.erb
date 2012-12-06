@@ -1,0 +1,41 @@
+<div class="sep_filter">
+  <div class="sep_filterbgtop">
+    <div class="sep_filterbgdown">
+      <div class="filteradio">
+        <a href="#" style="color:#000000;" id="all" onclick="jQuery('#rightside').load('/do_the_search?brand=all');"><input type="checkbox" name="checkbox" id="all_checkbox" checked="true"/> All</a>
+      </div>
+      <% @brands.each_with_index do |brand, index| %>
+        <%- if index < 11 %>
+          <div class="filteradio">
+            <%- unless session['brands'] -%>
+              <a href="/do_the_search?brand=<%= brand.id %>"><input type="checkbox" name="checkbox" id="<%= brand.name %>_checkbox" checked="true" /></a>
+            <%- else -%>
+              <%- brands = session['brands'].split('|') -%>
+              <%- if brands.include? brand.id.to_s -%>
+                <a href="#" onclick="jQuery('#rightside').load( '/do_the_search?brand=<%= brand.id %>');"><input type="checkbox" name="checkbox" id="<%= brand.name %>_checkbox" checked="true"/></a>
+              <%- else -%>
+                <a href="#" onclick="jQuery('#rightside').load( '/do_the_search?brand=<%= brand.id %>');"><input type="checkbox" name="checkbox" id="<%= brand.name %>_checkbox" checked="true" /></a>
+              <%- end -%>
+            <%- end -%>
+            <label for="checkbox"><%= brand.name %></label>
+          </div>
+        <%- else %>
+          <div class="filteradio2">
+            <%- unless session['brands'] -%>
+              <a href="/do_the_search?brand=<%= brand.id %>"><input type="checkbox" name="checkbox" id="<%= brand.name %>_checkbox" checked="true" /></a>
+            <%- else -%>
+              <%- brands = session['brands'].split('|') -%>
+              <%- if brands.include? brand.id.to_s -%>
+                <a href="#" onclick="jQuery('#rightside').load( '/do_the_search?brand=<%= brand.id %>');"><input type="checkbox" name="checkbox" id="<%= brand.name %>_checkbox" checked="true"/></a>
+              <%- else -%>
+                <a href="#" onclick="jQuery('#rightside').load( '/do_the_search?brand=<%= brand.id %>');"><input type="checkbox" name="checkbox" id="<%= brand.name %>_checkbox" checked="true" /></a>
+                <%- end -%>
+              <%- end -%>
+            <label for="checkbox"><%= brand.name %></label>
+          </div>
+        <%- end %>
+      <% end %>
+
+    </div>
+  </div>
+</div>
